@@ -13,7 +13,7 @@ mun = ['Recife']
 
 lista_dfs = []
 
-for ano in [2022, 2023]:
+for ano in range(2015, 2024):
     for cd_municipio, municipio in zip(cd_mun, mun):
         for bimestre in [1, 2, 3, 4, 5, 6]:
             print(f"Extraindo {municipio} - {bimestre} - {ano}.csv")
@@ -34,4 +34,4 @@ for ano in [2022, 2023]:
 
 dataframes = pd.concat(lista_dfs)      
 
-dataframes.to_csv(f"../processed/rreo/rreo_6_capitais.csv", sep=";", index=False, decimal=",")
+dataframes.to_csv(f"../processed/rreo/rreo_6_recife_2015_2023.csv", sep=";", index=False, decimal=",")
