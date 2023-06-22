@@ -9,13 +9,13 @@ def carrega_municipios():
     df_municipio = pd.read_excel('src/dicio/cd_municipio_.xlsx', sheet_name='Sheet1', usecols=['cod_completo', 'nome_municipio'])
     return df_municipio
 
-def extract(anos, bimestres, relatorio, anexo, cod_entes, nome_entes):
+def extract(anos, bimestres, documento, anexo, cod_entes, nome_entes):
     sh = SiconfiHandler()
     dfs = []
     for ano in anos:
         for bimestre in bimestres:
             for cod_ente, municipio in zip(cod_entes, nome_entes):
-                sh.mount_url(ano, bimestre, relatorio, anexo, cod_ente, municipio)
+                sh.mount_url(ano, bimestre, documento, anexo, cod_ente, municipio)
                 df = sh.receive_data()
                 dfs.append(df)
                 time.sleep(0.5)
@@ -39,10 +39,10 @@ def main():
         st.title("Menu")
         st.markdown("Selecione os dados que deseja extrair")
         doc_sel = st.selectbox("Selecione o documento", options=documentos)
-        anos_sel = st.multiselect("Selecione os anos da referência", options=range(2015, 2024))
-        bimestres_sel = st.multiselect("Selecione os bimestres da referência", options=range(1,7))
+        anos_sel = st.multiselect("Selecione o exercício", options=range(2015, 2024))
+        bimestres_sel = st.multiselect("Selecione o período de referência (bimestre/quadrimestre)", options=range(1,7))
         mun_sel = st.multiselect("Selecione o ente", df_municipio.nome_municipio.unique())
-        esfera_sel = st.selectbox("Selecione a esfera", options=['M', 'E', 'U', 'C'])
+        #esfera_sel = st.selectbox("Selecione a esfera", options=['M', 'E', 'U', 'C'])
         anexo_sel = st.selectbox("Selecione o anexo", options=['01', '02', '03', '04', '05', '06', '07', '10'])
 
     # Aplicando filtros de entes

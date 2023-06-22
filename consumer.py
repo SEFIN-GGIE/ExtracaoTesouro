@@ -20,13 +20,12 @@ if __name__ == '__main__':
 
     # CONFIGURAÇÃO
     ANEXO = configuracao_extracao['ANEXO']
-    ANOS = configuracao_extracao['ANOS']
-    BIMESTRES = configuracao_extracao['BIMESTRES']
+    EXERCICIO = configuracao_extracao['EXERCICIO']
+    PERIODO = configuracao_extracao['PERIODO']
     COD_MUNICIPIOS = configuracao_extracao['COD_MUNICIPIOS']
     NOMES_MUNICIPIOS = configuracao_extracao['NOMES_MUNICIPIOS']
     NOME_ARQUIVO = configuracao_extracao['NOME_ARQUIVO']
-    RELATORIO = configuracao_extracao['RELATORIO']
+    DOCUMENTO = configuracao_extracao['DOCUMENTO']
 
     # EXTRACAO
-    extract(ANOS, BIMESTRES, RELATORIO, ANEXO, COD_MUNICIPIOS, NOMES_MUNICIPIOS, NOME_ARQUIVO)
-    
+    extract(EXERCICIO, PERIODO, DOCUMENTO, ANEXO, COD_MUNICIPIOS, NOMES_MUNICIPIOS, NOME_ARQUIVO)
