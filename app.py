@@ -31,14 +31,15 @@ def main():
     st.title("Extrator de dados do Siconfi")
 
     # Seleções disponíveis
-    documentos = ['RREO', 'RGF', 'DCA', 'MSC - Patrimonial', 'MSC - Orçamentária', 'MSC - Controle']
+    #documentos = ['RREO', 'RGF', 'DCA', 'MSC - Patrimonial', 'MSC - Orçamentária', 'MSC - Controle']
+    documentos = ['RREO', 'RGF']
     df_municipio = carrega_municipios()
 
     # Criando filtros
     with st.sidebar:
         st.title("Menu")
         st.markdown("Selecione os dados que deseja extrair")
-        doc_sel = st.selectbox("Selecione o documento", options=documentos)
+        doc_sel = st.selectbox("Selecione o documento", options=documentos).lower()
         anos_sel = st.multiselect("Selecione o exercício", options=range(2015, 2024))
         bimestres_sel = st.multiselect("Selecione o período de referência (bimestre/quadrimestre)", options=range(1,7))
         mun_sel = st.multiselect("Selecione o ente", df_municipio.nome_municipio.unique())

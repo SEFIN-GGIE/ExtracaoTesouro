@@ -32,6 +32,7 @@ class SiconfiHandler:
         
         if debug:
             print(self.mounted_url)
+        
 
     def receive_data(self):
         try:
