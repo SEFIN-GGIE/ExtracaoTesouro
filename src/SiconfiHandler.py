@@ -36,7 +36,7 @@ class SiconfiHandler:
 
     def receive_data(self):
         try:
-            r = requests.get(self.mounted_url)
+            r = requests.get(self.mounted_url, headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'})
         except Exception as e:
             print(e)
             return None
