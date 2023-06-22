@@ -15,7 +15,7 @@ def extract(anos, periodos, documento, anexo, cod_entes, nome_entes):
     for ano in anos:
         for periodo in periodos:
             for cod_ente, municipio in zip(cod_entes, nome_entes):
-                sh.mount_url(ano, periodo, documento, anexo, cod_ente, municipio)
+                sh.mount_url(ano, periodo, documento, anexo, cod_ente, municipio, debug=True)
                 st.write(f"Extraindo {documento} - {municipio} - {periodo} - {ano} ANEXO {documento}")
                 df = sh.receive_data()
                 dfs.append(df)
@@ -53,7 +53,7 @@ def main():
 
     if st.button("Extrair dados"):
         # Iniciando extração
-        data = extract(anos_sel, periodo_sel, doc_sel, anexo_sel, cd_mun_sel, mun_sel, debug=True)
+        data = extract(anos_sel, periodo_sel, doc_sel, anexo_sel, cd_mun_sel, mun_sel)
         st.write("Dados extraídos com sucesso!")
         st.write(f"### {doc_sel}")
         st.dataframe(data)
