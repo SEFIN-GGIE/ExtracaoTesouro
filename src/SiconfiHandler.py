@@ -30,6 +30,10 @@ class SiconfiHandler:
             f"&in_periodicidade=Q&nr_periodo={periodo}&co_tipo_demonstrativo=RGF&no_anexo=RGF" \
             f"-Anexo%20{cd_anexo}&co_esfera={cd_esfera}&co_poder=E&id_ente={cd_municipio}"
         
+        elif documento == 'dca':
+            self.mounted_url = self.base_url + f"dca?an_exercicio={ano}" \
+                  f"&no_anexo={cd_anexo}%20I-AB&id_ente={cd_municipio}"
+        
         if debug:
             print(self.mounted_url)
         
