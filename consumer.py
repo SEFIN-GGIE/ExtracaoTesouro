@@ -3,6 +3,7 @@ from src.SiconfiHandler import SiconfiHandler
 from configs import configuracao_extracao
 import time
 
+
 def extract(anos, bimestres, relatorio, anexo, cod_entes, nome_entes, file_name):
     sh = SiconfiHandler()
     dfs = []
@@ -14,18 +15,28 @@ def extract(anos, bimestres, relatorio, anexo, cod_entes, nome_entes, file_name)
                 dfs.append(df)
                 time.sleep(0.5)
     df = pd.concat(dfs)
-    df.to_csv(f'processed/{relatorio}/{file_name}.csv', index=False, decimal=',', sep=';')
+    df.to_csv(
+        f"processed/{relatorio}/{file_name}.csv", index=False, decimal=",", sep=";"
+    )
 
-if __name__ == '__main__':
 
+if __name__ == "__main__":
     # CONFIGURAÇÃO
-    ANEXO = configuracao_extracao['ANEXO']
-    EXERCICIO = configuracao_extracao['EXERCICIO']
-    PERIODO = configuracao_extracao['PERIODO']
-    COD_MUNICIPIOS = configuracao_extracao['COD_MUNICIPIOS']
-    NOMES_MUNICIPIOS = configuracao_extracao['NOMES_MUNICIPIOS']
-    NOME_ARQUIVO = configuracao_extracao['NOME_ARQUIVO']
-    DOCUMENTO = configuracao_extracao['DOCUMENTO']
+    ANEXO = configuracao_extracao["ANEXO"]
+    EXERCICIO = configuracao_extracao["EXERCICIO"]
+    PERIODO = configuracao_extracao["PERIODO"]
+    COD_MUNICIPIOS = configuracao_extracao["COD_MUNICIPIOS"]
+    NOMES_MUNICIPIOS = configuracao_extracao["NOMES_MUNICIPIOS"]
+    NOME_ARQUIVO = configuracao_extracao["NOME_ARQUIVO"]
+    DOCUMENTO = configuracao_extracao["DOCUMENTO"]
 
     # EXTRACAO
-    extract(EXERCICIO, PERIODO, DOCUMENTO, ANEXO, COD_MUNICIPIOS, NOMES_MUNICIPIOS, NOME_ARQUIVO)
+    extract(
+        EXERCICIO,
+        PERIODO,
+        DOCUMENTO,
+        ANEXO,
+        COD_MUNICIPIOS,
+        NOMES_MUNICIPIOS,
+        NOME_ARQUIVO,
+    )

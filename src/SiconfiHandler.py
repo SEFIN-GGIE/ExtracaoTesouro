@@ -2,52 +2,64 @@ import requests
 import pandas as pd
 import json
 
+
 class SiconfiHandler:
     def __init__(self):
-        self.base_url = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/'
-        
-        # baseado na seguinte url, crie uma classe que faça a requisição para diferentes seleções
-    def mount_url(
-            self,
-            ano:int, 
-            periodo:int,
-            documento:str, 
-            cd_anexo:str, 
-            cd_municipio:str,
-            nm_municipio:str,
-            cd_esfera:str = 'M',
-            debug=False, 
-            ):
-        print(f"Extraindo {documento} - {nm_municipio} - {periodo} - {ano} ANEXO {cd_anexo}")
+        self.base_url = "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/"
 
-        if documento == 'rreo':
-            self.mounted_url = self.base_url + f"rreo?an_exercicio={ano}" \
-                  f"&nr_periodo={periodo}&co_tipo_demonstrativo=RREO&no_anexo=RREO" \
-                  f"-Anexo%20{cd_anexo}&co_esfera={cd_esfera}&id_ente={cd_municipio}"
-        
-        elif documento == 'rgf':
-            self.mounted_url = self.base_url + f"rgf?an_exercicio={ano}" \
-            f"&in_periodicidade=Q&nr_periodo={periodo}&co_tipo_demonstrativo=RGF&no_anexo=RGF" \
-            f"-Anexo%20{cd_anexo}&co_esfera={cd_esfera}&co_poder=E&id_ente={cd_municipio}"
-        
-        elif documento == 'dca':
-            self.mounted_url = self.base_url + f"dca?an_exercicio={ano}" \
-                  f"&no_anexo={cd_anexo}%20I-AB&id_ente={cd_municipio}"
-        
+        # baseado na seguinte url, crie uma classe que faça a requisição para diferentes seleções
+
+    def mount_url(
+        self,
+        ano: int,
+        periodo: int,
+        documento: str,
+        cd_anexo: str,
+        cd_municipio: str,
+        nm_municipio: str,
+        cd_esfera: str = "M",
+        debug=False,
+    ):
+        print(
+            f"Extraindo {documento} - {nm_municipio} - {periodo} - {ano} ANEXO {cd_anexo}"
+        )
+
+        if documento == "rreo":
+            self.mounted_url = (
+                self.base_url + f"rreo?an_exercicio={ano}"
+                f"&nr_periodo={periodo}&co_tipo_demonstrativo=RREO&no_anexo=RREO"
+                f"-Anexo%20{cd_anexo}&co_esfera={cd_esfera}&id_ente={cd_municipio}"
+            )
+
+        elif documento == "rgf":
+            self.mounted_url = (
+                self.base_url + f"rgf?an_exercicio={ano}"
+                f"&in_periodicidade=Q&nr_periodo={periodo}&co_tipo_demonstrativo=RGF&no_anexo=RGF"
+                f"-Anexo%20{cd_anexo}&co_esfera={cd_esfera}&co_poder=E&id_ente={cd_municipio}"
+            )
+
+        elif documento == "dca":
+            self.mounted_url = (
+                self.base_url + f"dca?an_exercicio={ano}"
+                f"&no_anexo={cd_anexo}%20I-AB&id_ente={cd_municipio}"
+            )
+
         if debug:
             print(self.mounted_url)
-        
 
     def receive_data(self):
         try:
-            r = requests.get(self.mounted_url, headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'})
+            r = requests.get(
+                self.mounted_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                },
+            )
         except Exception as e:
             print(e)
             return None
         base = json.loads(r.text)
-        info = base['items']
+        info = base["items"]
         df = pd.DataFrame(info)
-        
-        return df
-        
 
+        return df
